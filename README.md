@@ -12,26 +12,56 @@
 
 ## Feature Selection:
 
-Focused on text features that are likely to contribute to the recommendation process.
-Selected features: "genres," "keywords," "title," "overview," "cast," and "crew."
+- Focused on text features that are likely to contribute to the recommendation process.
+- Selected features: "genres," "keywords," "title," "overview," "cast," and "crew."
 
 ## Data Cleaning:
 
-Checked for null and duplicate values in the dataset to ensure data integrity.
+- Checked for null and duplicate values in the dataset to ensure data integrity.
 
 ## Data Transformation:
 
-Transformed the text features to prepare them for model building.
-Converted raw text values into list format.
-Extracted relevant information from raw data.
-Removed white spaces between words.
-Created a new feature called "tags" by merging all relevant text features.
+- Transformed the text features to prepare them for model building.
+- Converted raw text values into list format.
+- Extracted relevant information from raw data.
+- Removed white spaces between words.
+- Created a new feature called "tags" by merging all relevant text features.
 ## Word Stemming:
 
-Applied stemming to transform words into their root form.
-Utilized the NLTK library with the PorterStemmer algorithm.
+- Applied stemming to transform words into their root form.
+- Utilized the NLTK library with the PorterStemmer algorithm.
 
 ## Model Development:
 
-Vectorized the features using the CountVectorizer algorithm from Scikit-learn.
-Utilized Cosine Similarity for searching and recommending the most similar movies based on user input.
+- Vectorized the features using the CountVectorizer algorithm from Scikit-learn.
+- Utilized Cosine Similarity for searching and recommending the most similar movies based on user input.
+
+## How to Use
+### Install Dependencies:
+
+- Make sure you have the required dependencies installed. You can use the following command:
+- Copy code
+``` pip install -r requirements.txt ```
+
+### Run the App:
+
+- Execute the following command to run the Streamlit web application:
+- Copy code
+``` streamlit run app.py ```
+- This will start a local server, and you can access the movie recommender system through your web browser.
+- 
+### Input Movie Name:
+
+- Enter the name of a movie you like into the provided input field.
+- Get Recommendations:
+  - The system will recommend 5 similar movies based on the input you provided.
+
+### Explore Recommendations:
+
+- Explore the recommended movies and discover new films that match your preferences.
+Feel free to explore and enhance the project based on your preferences and requirements. Happy movie watching!
+
+
+
+
+
