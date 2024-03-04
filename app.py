@@ -4,7 +4,7 @@ import pickle
 import path, sys
 
 class MovieRecommender:
-    def __init__(self, movies_path='model\movies_list.pkl', similarity_path='model\similarity.pkl'):
+    def __init__(self, movies_path='./model/movies_list.pkl', similarity_path='./model/similarity.pkl'):
         self.movies = pickle.load(open(movies_path, 'rb'))
         self.similarity = pickle.load(open(similarity_path, 'rb'))
 
