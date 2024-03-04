@@ -72,7 +72,7 @@ The recommender system follows a step-by-step process, utilizing a dataset of 50
 Feel free to explore and enhance the project based on your preferences and requirements. Happy movie watching!
 
 ## Acknowledgments
-- The dataset used in this project is sourced from [insert dataset source].
+- The dataset used in this project is sourced from kaggle.
 - Special thanks to the Streamlit and Scikit-learn communities for their excellent documentation and support.
 
 
