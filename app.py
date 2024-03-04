@@ -1,5 +1,4 @@
 import streamlit as st
-import requests as re
 import pickle
 
 class MovieRecommender:
