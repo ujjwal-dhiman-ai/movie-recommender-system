@@ -1,7 +1,6 @@
 import streamlit as st
 import requests as re
 import pickle
-import path, sys
 
 class MovieRecommender:
     def __init__(self, movies_path='./model/movies_list.pkl', similarity_path='./model/similarity.pkl'):
@@ -36,6 +35,4 @@ def main():
 
 
 if __name__ == "__main__":
-    dir = path.Path(__file__).abspath()
-    sys.append.path(dir.parent.parent)
     main()
