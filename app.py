@@ -5,6 +5,7 @@ import pickle
 
 class MovieRecommender:
     def __init__(self, movies_path=r'model/movies_list.pkl', similarity_path=r'model/similarity.pkl'):
+        print(movies_path)
         self.movies = pickle.load(open(movies_path, 'rb'))
         self.similarity = pickle.load(open(similarity_path, 'rb'))
 
