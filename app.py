@@ -3,42 +3,37 @@ import requests as re
 import pickle
 
 
-def fetch_poster(movie_id):
-    url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(
-        movie_id)
-    data = re.get(url)
-    data = data.json()
-    poster_path = data['poster_path']
-    full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-    return full_path
+class MovieRecommender:
+    def __init__(self, movies_path='model/movies_list.pkl', similarity_path='model/similarity.pkl'):
+        self.movies = pickle.load(open(movies_path, 'rb'))
+        self.similarity = pickle.load(open(similarity_path, 'rb'))
+
+    def recommend(self, movie):
+        index = self.movies[self.movies['title'] == movie].index[0]
+        distances = sorted(
+            list(enumerate(self.similarity[index])), reverse=True, key=lambda x: x[1])
+        recommended_movie_names = [
+            self.movies.iloc[i[0]].title for i in distances[1:6]]
+        return recommended_movie_names
 
 
-def recommend(movie):
-    index = movies[movies['title'] == movie].index[0]
-    distances = sorted(
-        list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-    recommended_movie_names = []
-    # recommended_movie_posters = []
-    for i in distances[1:6]:
-        # fetch the movie poster
-        movie_id = movies.iloc[i[0]].movie_id
-        # recommended_movie_posters.append(fetch_poster(movie_id))
-        recommended_movie_names.append(movies.iloc[i[0]].title)
+def main():
+    # Instantiate the MovieRecommender class
+    movie_recommender = MovieRecommender()
 
-    return recommended_movie_names
+    st.header('Movie Recommender System')
+
+    movie_list = movie_recommender.movies['title'].values
+    selected_movie = st.selectbox(
+        "Type or select a movie from the dropdown",
+        movie_list
+    )
+
+    if st.button('Show Recommendation'):
+        recommended_movie_names = movie_recommender.recommend(selected_movie)
+        for movie in recommended_movie_names:
+            st.text(movie)
 
 
-st.header('Movie Recommender System')
-movies = pickle.load(open('model/movies_list.pkl', 'rb'))
-similarity = pickle.load(open('model/similarity.pkl', 'rb'))
-
-movie_list = movies['title'].values
-selected_movie = st.selectbox(
-    "Type or select a movie from the dropdown",
-    movie_list
-)
-
-if st.button('Show Recommendation'):
-    recommended_movie_names = recommend(selected_movie)
-    for movie in recommended_movie_names:
-        st.text(movie)
+if __name__ == "__main__":
+    main()
