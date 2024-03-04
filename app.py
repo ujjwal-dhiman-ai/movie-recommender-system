@@ -2,25 +2,37 @@ import streamlit as st
 import requests as re
 import pickle
 
-def recommend(movie):
-    index = movies[movies['title'] == movie].index[0]
-    distances = sorted(
-        list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-    recommended_movie_names = [movies.iloc[i[0]].title for i in distances[1:6]]
-    return recommended_movie_names
+class MovieRecommender:
+    def __init__(self, movies_path='model/movies_list.pkl', similarity_path='model/similarity.pkl'):
+        self.movies = pickle.load(open(movies_path, 'rb'), encoding='latin1')
+        self.similarity = pickle.load(open(similarity_path, 'rb'))
+
+    def recommend(self, movie):
+        index = self.movies[self.movies['title'] == movie].index[0]
+        distances = sorted(
+            list(enumerate(self.similarity[index])), reverse=True, key=lambda x: x[1])
+        recommended_movie_names = [
+            self.movies.iloc[i[0]].title for i in distances[1:6]]
+        return recommended_movie_names
 
 
-st.header('Movie Recommender System')
-movies = pickle.load(open('model/movies_list.pkl', 'rb'))
-similarity = pickle.load(open('model/similarity.pkl', 'rb'))
+def main():
+    # Instantiate the MovieRecommender class
+    movie_recommender = MovieRecommender()
 
-movie_list = movies['title'].values
-selected_movie = st.selectbox(
-    "Type or select a movie from the dropdown",
-    movie_list
-)
+    st.header('Movie Recommender System')
 
-if st.button('Show Recommendation'):
-    recommended_movie_names = recommend(selected_movie)
-    for movie in recommended_movie_names:
-        st.text(movie)
+    movie_list = movie_recommender.movies['title'].values
+    selected_movie = st.selectbox(
+        "Type or select a movie from the dropdown",
+        movie_list
+    )
+
+    if st.button('Show Recommendation'):
+        recommended_movie_names = movie_recommender.recommend(selected_movie)
+        for movie in recommended_movie_names:
+            st.text(movie)
+
+
+if __name__ == "__main__":
+    main()
