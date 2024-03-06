@@ -11,7 +11,7 @@ This project is a movie recommender system built using Python, Streamlit, and th
 - Scikit-learn: The machine learning library employed for developing the recommendation model.
 
 ## Overview
-The recommender system follows a step-by-step process, utilizing a dataset of 5000 movies from Kaggle. The main steps in the model development include:
+The movie recommender system follows a step-by-step process, utilizing a dataset of 5000 movies from Kaggle. The main steps in the model development include:
 
 ### Data Reading:
 
